@@ -1,96 +1,72 @@
 # SQL Query Plan Visualizer
 
-A visually stunning, static web application that transforms raw MySQL `EXPLAIN FORMAT=JSON` output into an intuitive, interactive, and aesthetically pleasing flow chart.
+> **A visually stunning, static web tool that transforms raw MySQL `EXPLAIN` JSON into interactive, futuristic flow charts.**
 
-## Features
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/React-19-blue)
+![Vite](https://img.shields.io/badge/Vite-7-purple)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-v4-cyan)
 
-### Command Center (Input)
-- Clean paste area for `EXPLAIN FORMAT=JSON` output
-- Auto-validation of JSON on paste
-- One-click "Load Demo" to see the visualization immediately
+## 🚀 Overview
 
-### Flow Visualization
-- Interactive graph using ReactFlow to render the query plan as a DAG
-- **Node Representation**:
-  - Different icons for JOIN, SELECT, SORT, GROUP BY operations
-  - Cost heatmap coloring from cool (cyan) to hot (red) based on cost
-  - Visual indicators for expensive operations
-- **Animated Edges**: Flowing particles to represent data direction and volume
+Typical database query plans are dense, text-heavy, and hard to read. **SQL Query Plan Visualizer** turns them into intuitive, directed graphs (DAGs) that let you instantly spot performance bottlenecks.
 
-### Deep Dive Details
-- Click any node to see detailed stats:
-  - Cost, Rows Examined, Key Used, Extra Info
-- Automatic "Critical Path" highlighting (most expensive chain)
-- Warnings for filesort and temporary table usage
+Built with a "Cyber-Glass" aesthetic, it combines deep dark backgrounds with neon accents to make database optimization feel like exploring a futuristic data map.
 
-## Tech Stack
+## ✨ Features
 
-- **Framework**: React + TypeScript (Vite)
-- **Styling**: Tailwind CSS v4
-- **Graph Library**: ReactFlow
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
+- **Interactive Graphs**: Powered by [React Flow](https://reactflow.dev/), visualizing the flow of data through your query.
+- **Cost Heatmaps**: Nodes change color from **Cool (Low Cost)** to **Hot (Expensive)** based on execution cost.
+- **Performance Insights**: Automatically highlights full table scans, temporary table usage, and file sorts.
+- **Privacy First**: **100% Static & Client-Side**. Your query plans are parsed locally in your browser and never sent to any server.
 
-## Getting Started
+## 🛠️ Tech Stack
+
+- **Framework**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Visuals**: [React Flow](https://reactflow.dev/) + [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+## ⚡ Getting Started
 
 ### Prerequisites
-
-- Node.js 18+
-- npm or yarn
+- Node.js 20+
 
 ### Installation
 
-```bash
-# Install dependencies
-npm install
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/prat31/sql_query_plan_visualizer.git
+    cd sql_query_plan_visualizer
+    ```
 
-# Start development server
-npm run dev
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-# Build for production
-npm run build
+3.  **Start the development server**
+    ```bash
+    npm run dev
+    ```
 
-# Run tests
-npm test
-```
+4.  Open `http://localhost:5173` in your browser.
 
-### Usage
+## 📖 Usage
 
-1. Run a MySQL query with `EXPLAIN FORMAT=JSON`:
-   ```sql
-   EXPLAIN FORMAT=JSON SELECT * FROM orders o
-   JOIN customers c ON o.customer_id = c.id
-   WHERE o.created_at > '2024-01-01';
-   ```
+1.  Run your MySQL query with `EXPLAIN FORMAT=JSON`:
+    ```sql
+    EXPLAIN FORMAT=JSON SELECT * FROM users JOIN orders ON users.id = orders.user_id;
+    ```
+2.  Copy the JSON output.
+3.  Paste it into the **SQL Query Plan Visualizer**.
+4.  Explore the graph!
 
-2. Copy the JSON output
+## 📦 Deployment
 
-3. Paste it into the visualizer or click "Load Demo" to see an example
+This project is designed to be hosted on **GitHub Pages** (or any static host).
+A GitHub Actions workflow is included in `.github/workflows/deploy.yml` which automatically builds and deploys to the `gh-pages` environment on push to `main`.
 
-4. Explore the flow chart:
-   - Zoom and pan to navigate
-   - Click nodes for detailed information
-   - Look for red nodes (expensive operations) and warning badges
+---
 
-## Understanding the Visualization
-
-### Node Colors
-- **Cyan/Green**: Low cost, efficient operations
-- **Purple**: Medium cost
-- **Amber**: Warning - consider optimization
-- **Red**: High cost - needs attention
-
-### Access Types (Best to Worst)
-- `system/const`: Best - single row lookup
-- `eq_ref/ref`: Good - index lookup
-- `range`: OK - index range scan
-- `index`: Warning - full index scan
-- `ALL`: Bad - full table scan
-
-### Warning Indicators
-- "Using filesort" - Consider adding an index for ORDER BY
-- "Using temporary" - Query needs temporary table
-
-## License
-
-MIT
+*Created by [Pratyush](https://pratcode.dev)*
